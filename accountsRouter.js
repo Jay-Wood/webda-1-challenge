@@ -28,6 +28,20 @@ router.get("/:id", (req, res) => {
         })
 })
 
+router.post("/", (req, res) => {
+    let { id } = req.params;
+    let newPost = req.body;
+
+    db("accounts")
+        .insert(newPost)
+        .then(post => {
+            res.status(200).json(post)
+        })
+        .catch(error => {
+            res.status(500).json({error: `An error occurred: ${error}`})
+        })
+
+})
 
 
 module.exports = router;
